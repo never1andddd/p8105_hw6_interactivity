@@ -1,0 +1,93 @@
+---
+title: "nyc_dashboard"
+output: 
+  flexdashboard::flex_dashboard:
+    orientation: columns
+    vertical_layout: fill
+---
+
+```{r setup, include=FALSE}
+library(flexdashboard)
+library(tidyverse)
+library(janitor)
+library(stringr)
+library(forcats)
+library(viridis)
+
+library(plotly)
+```
+
+```{r}
+library(rnoaa)
+
+weather = 
+  meteo_pull_monitors(c("USW00094728", "USC00519397", "USS0023B17S"),
+                      var = c("PRCP", "TMIN", "TMAX"), 
+                      date_min = "2016-01-01",
+                      date_max = "2016-12-31") %>%
+  mutate(
+    name = recode(id, USW00094728 = "CentralPark_NY", 
+                      USC00519397 = "Waikiki_HA",
+                      USS0023B17S = "Waterhole_WA"),
+    tmin = tmin / 10,
+    tmax = tmax / 10) %>%
+  select(name, id, everything())
+weather
+
+```
+
+
+
+Column {data-width=650}
+-----------------------------------------------------------------------
+
+### Scatterplot
+
+```{r}
+weather %>% 
+  mutate(hover_text = str_c("Date: ", date,'\nName: ', name)) %>% 
+  plot_ly(x = ~tmin, y = ~tmax, color = ~prcp,
+          text = ~hover_text,
+          type = "scatter", mode = "marker", alpha = 0.5)
+```
+
+### lineplot
+```{r}
+weather %>% 
+  mutate(hover_text = str_c("Date: ", date,'\nName: ', name)) %>% 
+  plot_ly(x = ~tmin, y = ~tmax, color = ~prcp,
+          text = ~hover_text,
+          type = "scatter", mode = "lines", alpha = 0.5)
+```
+Column {data-width=350}
+-----------------------------------------------------------------------
+
+### boxplot
+
+```{r}
+airbnb %>% 
+  mutate(neighbourhood = fct_reorder(neighbourhood, price)) %>% 
+  plot_ly(x = ~neighbourhood, y = ~price, color = ~neighbourhood,
+          colors = "Set2",
+          type = "box")
+
+weather %>%
+  mutate(date = fct_reorder())
+  
+```
+
+### Bar chart
+
+```{r}
+airbnb %>% 
+  count(neighbourhood) %>% 
+  mutate(neighbourhood = fct_reorder(neighbourhood, n)) %>% 
+  plot_ly(x = ~neighbourhood, y = ~n, color = ~neighbourhood, 
+          type = "bar")
+
+nyc_inspections %>% 
+  count(boro) %>%
+  mutate(boro = fct_infreq(boro,n)) %>%
+  plot_ly(x = ~boro, y= ~n, color = ~boro, type = "bar") 
+```
+
