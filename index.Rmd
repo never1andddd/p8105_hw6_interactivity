@@ -1,7 +1,28 @@
----
-title: "Holy cow!"
----
 
-### I have a webpage!
 
-And I can put all kinds of stuff on it!
+In Problems 1 and 2, I worked with Xin Zheng (UNI: xz2677).
+
+The dataset we used is the NOAA. It contains five core variables for all New York state weather stations from January 1, 1981 through December 31, 2010. We will focus on data from January 1,2016 to December 31, 2016. 
+The resulting R dataset weather contains variables:
+name: Name of weather station
+id: Weather station ID
+date: Date of observation
+prcp: Precipitation (tenths of mm)
+tmax: Maximum temperature (tenths of degrees C)
+tmin: Minimum temperature (tenths of degrees C)
+
+### Problem 1 
+In this problem we have 3 plots. That is a scatter plot, a box plot and a bar plot. The scatter plot illustrates the relationship between tmax and tmin. The box plot compares the difference of precipitation between stations. The bar plot illustrate the mean of tmax across each months for each station.
+The dashboard containing our solution to this problem is [here](dashboard.html).
+
+
+### Problem 2
+In this problem, we based on the first problem and add 2 widgets. That is a selectInput widget, a sliderInput widget. The input of the selectInput widget is names of stations and the input of the sliderInput widget is the precipitation.
+The dashboard containing the solution to this problem is [here](shiny_dashboard.html)
+
+
+### Git repo 
+
+The Git repo containing the solution to this problem is
+[here](https://github.com/zxinxinz/P8105_hw6-dashboard)
+
