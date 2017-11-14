@@ -79,15 +79,10 @@ weather %>%
 ### Bar chart
 
 ```{r}
-airbnb %>% 
-  count(neighbourhood) %>% 
-  mutate(neighbourhood = fct_reorder(neighbourhood, n)) %>% 
-  plot_ly(x = ~neighbourhood, y = ~n, color = ~neighbourhood, 
-          type = "bar")
-
-nyc_inspections %>% 
-  count(boro) %>%
-  mutate(boro = fct_infreq(boro,n)) %>%
-  plot_ly(x = ~boro, y= ~n, color = ~boro, type = "bar") 
+weather%>%
+  separate(date, into = c("year","month","day"), sep = "-")%>%
+  group_by(month,name)%>%
+  summarize(t = mean(tmax))%>%
+  plot_ly(x= ~month, y= ~t, color = ~name, type = "bar")
 ```
 
