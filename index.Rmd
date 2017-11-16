@@ -18,11 +18,11 @@ The dashboard containing our solution to this problem is [here](dashboard.html).
 
 ### Problem 2
 In this problem, we based on the first problem and add 2 widgets. That is a selectInput widget, a sliderInput widget. The input of the selectInput widget is names of stations and the input of the sliderInput widget is the precipitation.
-The dashboard containing the solution to this problem is [here](shiny_dashboard.html)
+The Git repo containing the solution to this problem is [here](https://github.com/zxinxinz/P8105_hw6-dashboard)
 
 
 ### Git repo 
 
-The Git repo containing the solution to this problem is
+The Git repo containing the solution to these problems is
 [here](https://github.com/zxinxinz/P8105_hw6-dashboard)
 
